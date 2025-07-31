@@ -1,5 +1,5 @@
 # Student-Skill-Sharing-Hub
-#  SkillShare Hub
+
 
 ##  Introduction
 
