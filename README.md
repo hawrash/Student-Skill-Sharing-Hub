@@ -45,20 +45,7 @@ I’ve always appreciated community learning, especially between peers. This pro
 | Commint |user Id,Contant,replay  | each commint has 1 user , can have many commint|
 
 ---
-
-## 🧱 Architecture Diagram
-
-```plaintext
-┌────────────┐      ┌────────────┐
-│   User     │◄────▶│   Lesson   │
-│            │      │            │
-│ • name     │      │ • topic    │
-│ • email    │      │ • desc     │
-│ • role     │      │ • date     │
-│ • subjects │      │ • teacher  │
-└────────────┘      │ • learner  │
-                    └────────────┘
-
+## 🧱 Architecture Diagram 
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -89,6 +76,21 @@ I’ve always appreciated community learning, especially between peers. This pro
 | GET | `/Student/:id/edit` | Edit Student form | Yes |
 | PUT | `/Student/:id` | Update Student | Yes |
 | DELETE | `/Student/:id` | Delete Student | Yes |
+
+
+```plaintext
+┌────────────┐      ┌────────────┐
+│   User     │◄────▶│   Lesson   │
+│            │      │            │
+│ • name     │      │ • topic    │
+│ • email    │      │ • desc     │
+│ • role     │      │ • date     │
+│ • subjects │      │ • teacher  │
+└────────────┘      │ • learner  │
+                    └────────────┘
+
+
+
 
 🧪 Testing
 ✅ Jest used for unit testing
