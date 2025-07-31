@@ -56,7 +56,7 @@ I’ve always appreciated community learning, especially between peers. This pro
 │ • role     │      │ • date     │
 │ • subjects │      │ • teacher  │
 └────────────┘      │ • learner  │
-                   └────────────┘
+                    └────────────┘
 
 🧪 Testing
 ✅ Jest used for unit testing
