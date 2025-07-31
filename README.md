@@ -6,7 +6,7 @@
 
 ---
 
-## 🤔 Why This Project?
+##  Why This Project?
 
 I’ve always appreciated community learning, especially between peers. This project allowed me to explore full-stack development while building something that encourages collaboration. I also aimed to practice authentication, data relationships, and MVC architecture using modern technologies.
 
