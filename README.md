@@ -187,32 +187,4 @@ JWT_SECRET=your_jwt_secret
 MONGODB_URI=mongodb://localhost:27017/skillshare
 Start the app
 
-bash
-Copy
-Edit
-npm run dev
-✅ Submission Checklist
-All code committed to Git
-
-Models have proper relationships
-
-MVC architecture implemented
-
-Authentication system works
-
-Styling is responsive
-
-Tests written and passing
-
-README complete
-
-🏁 License
-MIT License
-
-🙌 Acknowledgments
-Thanks to the instructors, classmates, and open-source community for their support and inspiration during this project.
-
-yaml
-Copy
-Edit
 
