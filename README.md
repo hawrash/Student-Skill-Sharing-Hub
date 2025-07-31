@@ -14,25 +14,25 @@ I’ve always appreciated community learning, especially between peers. This pro
 
 ## ✅ Core Features
 
-- Secure registration & login (JWT authentication)
-- Role-based user types (teacher/learner)
-- Teachers can create and manage lessons
-- Learners can browse and book lessons
-- Protected dashboard with conditional views
-- Error handling for common edge cases
-- Responsive, user-friendly interface
+- Secure registration & login (JWT authentication)  
+- Role-based user types (teacher/learner)  
+- Teachers can create and manage lessons  
+- Learners can browse and book lessons  
+- Protected dashboard with conditional views  
+- Error handling for common edge cases  
+- Responsive, user-friendly interface  
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB + Mongoose
-- **Authentication**: JWT + bcrypt
-- **Views**: JSX-style EJS templates
-- **Styling**: Custom CSS (responsive)
-- **Testing**: Jest, MongoDB Memory Server
-- **Architecture**: MVC (Model-View-Controller)
+- **Backend**: Node.js, Express.js  
+- **Database**: MongoDB + Mongoose  
+- **Authentication**: JWT + bcrypt  
+- **Views**: JSX-style EJS templates  
+- **Styling**: Custom CSS (responsive)  
+- **Testing**: Jest, MongoDB Memory Server  
+- **Architecture**: MVC (Model-View-Controller)  
 
 ---
 
@@ -47,8 +47,6 @@ I’ve always appreciated community learning, especially between peers. This pro
 
 ## 🧱 Architecture Diagram
 
-
-
 ```plaintext
 ┌────────────┐      ┌────────────┐
 │   User     │◄────▶│   Lesson   │
@@ -60,84 +58,95 @@ I’ve always appreciated community learning, especially between peers. This pro
 └────────────┘      │ • learner  │
                    └────────────┘
 
+🧪 Testing
+✅ Jest used for unit testing
 
-## 🧪 Testing
+✅ mongodb-memory-server for isolated DB tests
 
-- ✅ Jest used for unit testing
-- ✅ mongodb-memory-server for isolated DB tests
-- ✅ At least one test suite covering model validation
+✅ At least one test suite covering model validation
 
----
+📝 Pseudocode Overview
+App Initialization
+Connect to MongoDB
 
-## 📝 Pseudocode Overview
+Load .env variables
 
-### App Initialization
+Initialize Express + Middleware
 
-- Connect to MongoDB  
-- Load `.env` variables  
-- Initialize Express + Middleware  
-- Set up routes  
-- Render homepage
+Set up routes
 
-### User Registration
+Render homepage
 
-- Show form  
-- Validate input  
-- Hash password  
-- Create User  
-- Generate JWT, store in cookie  
-- Redirect to dashboard
+User Registration
+Show form
 
-### User Login
+Validate input
 
-- Find user by email  
-- Compare password hash  
-- Generate JWT if valid  
-- Store in cookie  
-- Redirect to dashboard
+Hash password
 
-### Dashboard Logic
+Create User
 
-- If `teacher`: Show posted lessons  
-- If `learner`: Show booked lessons  
+Generate JWT, store in cookie
 
-### Lesson Creation (Teacher)
+Redirect to dashboard
 
-- Show creation form  
-- Validate input  
-- Associate lesson with teacher ID  
-- Save to DB
+User Login
+Find user by email
 
-### Lesson Booking (Learner)
+Compare password hash
 
-- View available lessons  
-- Book a lesson  
-- Associate learner ID  
-- Update status to “booked”
+Generate JWT if valid
 
-### Edit / Cancel Lesson
+Store in cookie
 
-- Update or delete lesson if authorized
+Redirect to dashboard
 
-### Logout
+Dashboard Logic
+If teacher: Show posted lessons
 
-- Clear cookie  
-- Redirect to login
+If learner: Show booked lessons
 
----
+Lesson Creation (Teacher)
+Show creation form
 
-## 🧩 Future Improvements
+Validate input
 
-- Add messaging between users
-- Email notifications for booking
-- Lesson categories and filters
-- Admin panel for user/lesson management
-- Lesson reviews/ratings
+Associate lesson with teacher ID
 
----
+Save to DB
 
-## 📂 File Structure
+Lesson Booking (Learner)
+View available lessons
 
+Book a lesson
+
+Associate learner ID
+
+Update status to “booked”
+
+Edit / Cancel Lesson
+Update or delete lesson if authorized
+
+Logout
+Clear cookie
+
+Redirect to login
+
+🧩 Future Improvements
+Add messaging between users
+
+Email notifications for booking
+
+Lesson categories and filters
+
+Admin panel for user/lesson management
+
+Lesson reviews/ratings
+
+📂 File Structure
+pgsql
+Copy
+Edit
 Student-Skill-Sharing-Hub/
 ├── README.md
 ├── .env
@@ -145,38 +154,33 @@ Student-Skill-Sharing-Hub/
 ├── server.js
 ├── app.js
 ├── models/
-│ ├── User.js
-│ └── Lesson.js
+│   ├── User.js
+│   └── Lesson.js
 ├── controllers/
 ├── views/
 ├── routes/
 ├── public/
-│ └── css/
+│   └── css/
 ├── tests/
-│ └── user.test.js
+│   └── user.test.js
 └── .gitignore
+🚀 Getting Started
+Clone the repo
 
-yaml
+bash
 Copy
 Edit
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repo  
-   ```bash
-   git clone https://github.com/yourusername/student-skill-sharing-hub.git
-   cd student-skill-sharing-hub
+git clone https://github.com/yourusername/student-skill-sharing-hub.git
+cd student-skill-sharing-hub
 Install dependencies
 
 bash
 Copy
 Edit
 npm install
-Create a .env file
+Create a .env file with:
 
-env
+ini
 Copy
 Edit
 JWT_SECRET=your_jwt_secret
@@ -188,19 +192,19 @@ Copy
 Edit
 npm run dev
 ✅ Submission Checklist
- All code committed to Git
+All code committed to Git
 
- Models have proper relationships
+Models have proper relationships
 
- MVC architecture implemented
+MVC architecture implemented
 
- Authentication system works
+Authentication system works
 
- Styling is responsive
+Styling is responsive
 
- Tests written and passing
+Tests written and passing
 
- README complete
+README complete
 
 🏁 License
 MIT License
@@ -214,10 +218,5 @@ Edit
 
 ---
 
-### ✅ What You Should Do Next:
-1. Save the above content as `README.md` in your project root.
-2. Commit it to your Git repository:
-   ```bash
-   git add README.md
-   git commit -m "Add complete README with models, features, and setup"
-   git push
+Just copy this whole block and save it as `README.md` in your project root.  
+If you want me to generate a downloadable `.md` file for you, just say the word!
