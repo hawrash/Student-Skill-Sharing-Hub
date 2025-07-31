@@ -164,27 +164,3 @@ Student-Skill-Sharing-Hub/
 ├── tests/
 │   └── user.test.js
 └── .gitignore
-🚀 Getting Started
-Clone the repo
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/student-skill-sharing-hub.git
-cd student-skill-sharing-hub
-Install dependencies
-
-bash
-Copy
-Edit
-npm install
-Create a .env file with:
-
-ini
-Copy
-Edit
-JWT_SECRET=your_jwt_secret
-MONGODB_URI=mongodb://localhost:27017/skillshare
-Start the app
-
-
