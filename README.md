@@ -58,14 +58,14 @@ I’ve always appreciated community learning, especially between peers. This pro
 └────────────┘      │ • learner  │
                    └────────────┘
 
-🧪 Testing
+##🧪 Testing
 ✅ Jest used for unit testing
 
 ✅ mongodb-memory-server for isolated DB tests
 
 ✅ At least one test suite covering model validation
 
-📝 Pseudocode Overview
+##📝 Pseudocode Overview
 App Initialization
 Connect to MongoDB
 
@@ -132,7 +132,7 @@ Clear cookie
 
 Redirect to login
 
-🧩 Future Improvements
+##🧩 Future Improvements
 Add messaging between users
 
 Email notifications for booking
@@ -143,7 +143,7 @@ Admin panel for user/lesson management
 
 Lesson reviews/ratings
 
-📂 File Structure
+##📂 File Structure
 pgsql
 Copy
 Edit
@@ -164,7 +164,7 @@ Student-Skill-Sharing-Hub/
 ├── tests/
 │   └── user.test.js
 └── .gitignore
-🚀 Getting Started
+##🚀 Getting Started
 Clone the repo
 
 bash
@@ -216,7 +216,3 @@ yaml
 Copy
 Edit
 
----
-
-Just copy this whole block and save it as `README.md` in your project root.  
-If you want me to generate a downloadable `.md` file for you, just say the word!
