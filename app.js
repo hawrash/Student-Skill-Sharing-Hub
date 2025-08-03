@@ -4,9 +4,9 @@ const morgan = require('morgan');
 const path = require('path');
 const methodOverride = require('method-override');
 
-const userRoutes = require('./routes/userRoutes');
-const studentRoutes = require('./routes/studentRoutes');
-const webRoutes = require('./routes/webRoutes');
+const userRoutes = require('./routes/userRoutes.js');
+const studentRoutes = require('./routes/studentRoutes.js');
+const webRoutes = require('./routes/webRoutes.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
