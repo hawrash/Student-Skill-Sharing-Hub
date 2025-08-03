@@ -190,11 +190,25 @@ Student-Skill-Sharing-Hub/
 ├── models/
 │   ├── User.js
 │   └── Lesson.js
+├── └──commint.js
 ├── controllers/
+│   ├── auth
+│   └── Lesson
+├── └──commint
+│   └── teacher
+├── └──student
 ├── views/
+│   ├── auth
+├── └──student
+│   └── layout.jsx
 ├── routes/
+│   ├── studentRoutes.js
+│   └── userRoutes.js
+├── └──webRoutes.js
 ├── public/
 │   └── css/
 ├── tests/
+│   ├──  student.test.js
 │   └── user.test.js
+│   └── integration.test.js
 └── .gitignore
