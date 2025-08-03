@@ -1,38 +1,32 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
 const path = require('path');
-const methodOverride = require('method-override');
-
-const userRoutes = require('./routes/userRoutes');
-const studentRoutes = require('./routes/studentRoutes');
-const webRoutes = require('./routes/webRoutes');
-
+const jsxEngine = require('jsx-view-engine')
 const app = express();
 
-app.set('view engine', 'ejs');  // Using EJS templates
+// Set up view engine to render React JSX views
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jsx');
+app.engine('jsx', jsxEngine())
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(morgan('dev'));
-app.use(methodOverride('_method'));  // For supporting PUT/DELETE in forms
 
-// Mount routes
-app.use('/users', userRoutes);
+// Import your routes
+const studentRoutes = require('./controllers/student/studentRoutes')
+
+// Use your routes
 app.use('/students', studentRoutes);
-app.use('/', webRoutes);
 
 // 404 handler
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).send('404 Not Found');
 });
 
-// Global error handler
+// Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong' });
+  res.status(500).send('Something went wrong');
 });
 
 module.exports = app;

@@ -1,4 +1,4 @@
-const Student = require('../student');
+const Student = require('../../models/student');
 
 module.exports = {
   findAll: () => Student.find(),

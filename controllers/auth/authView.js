@@ -1,12 +1,13 @@
-const React = require('react');
-const DefaultLayout = require('../layouts/default');
-
 module.exports = {
-  loginForm(req, res) {
-    res.render('auth/login', {});
+  renderHome(req, res) {
+    res.render('home');
   },
 
-  registerForm(req, res) {
-    res.render('auth/register', {});
+  renderLogin(req, res) {
+    res.render('auth/login');
+  },
+
+  renderDashboard(req, res) {
+    res.render('dashboard');
   }
 };
