@@ -183,6 +183,7 @@ Copy
 Edit
 Student-Skill-Sharing-Hub/
 ├── README.md
+├── artillery.yml
 ├── .env
 ├── package.json
 ├── server.js
@@ -212,3 +213,4 @@ Student-Skill-Sharing-Hub/
 │   └── user.test.js
 │   └── integration.test.js
 └── .gitignore
+
