@@ -1,0 +1,43 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - name: "User Registration"
+    flow:
+      - post:
+          url: "/controllers/user/userApi.js"
+          json:
+            name: "Test User"
+            email: "test@example.com"
+            password: "Password123"
+          capture:
+            - json: "$.token"
+              as: "authToken"
+
+  - name: "User Login"
+    flow:
+      - post:
+          url: "/views/auth/SingIn.jsx"
+          json:
+            email: "test@example.com"
+            password: "Password123"
+          capture:
+            - json: "$.token"
+              as: "authToken"
+
+  - name: "Protected API Calls"
+    flow:
+      - get:
+          url: "/controllers/student/studentApi.js"
+          headers:
+            Authorization: "Bearer {{authToken}}"
+      - post:
+          url: "/controllers/student/studentApi.js"
+          headers:
+            Authorization: "Bearer {{authToken}}"
+          json:
+            name: "Test Fruit"
+            color: "Red"
+            readyToEat: true

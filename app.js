@@ -17,7 +17,9 @@ const studentRoutes = require('./controllers/student/studentRoutes')
 
 // Use your routes
 app.use('/students', studentRoutes);
-
+app.use('/teacher', teacherRoutes);
+app.use('/controllers/auth/authRoutes.js', authRoutes);
+app.use('/user', userRoutes);
 // 404 handler
 app.use((req, res) => {
   res.status(404).send('404 Not Found');

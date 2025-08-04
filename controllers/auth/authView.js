@@ -4,7 +4,7 @@ module.exports = {
   },
 
   renderLogin(req, res) {
-    res.render('auth/login');
+    res.render('../../views/auth/SingIn.jsx');
   },
 
   renderDashboard(req, res) {

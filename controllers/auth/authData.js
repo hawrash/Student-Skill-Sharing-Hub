@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+const User = require('../../controllers/user/userData');
 module.exports = {
   findUserByEmail(email) {
     return User.findOne({ email });

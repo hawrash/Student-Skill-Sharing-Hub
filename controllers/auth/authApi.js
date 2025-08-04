@@ -1,4 +1,4 @@
-const authData = require('./authData'); // Make sure this has findUserByEmail and createUser functions
+const authData = require('./authData'); 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -30,17 +30,16 @@ module.exports = {
   },
 
   async getUserProfile(req, res) {
-    // You should implement finding user by req.user.id or token data here
+
     res.send('User profile endpoint');
   },
 
   async updateUser(req, res) {
-    // You should implement updating user data here
     res.send('Update user endpoint');
   },
 
   async deleteUser(req, res) {
-    // You should implement deleting user here
+    
     res.send('Delete user endpoint');
   },
 
