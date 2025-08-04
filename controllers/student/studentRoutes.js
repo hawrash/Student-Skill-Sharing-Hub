@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const studentApi = require('../controllers/studentApi');
-const { protect } = require('../middleware/authMiddleware'); // if you use auth
+const { protect } = require('../../middleware/authMiddleware'); 
+const studentApi = require('./studentApi');
+
 
 router.get('/', protect, studentApi.getAllStudents);
 router.get('/:id', protect, studentApi.getStudentById);
