@@ -1,13 +1,20 @@
-module.exports = {
-  renderHome(req, res) {
-    res.render('home');
+const viewController = {
+  signUp(req, res, next){
+    res.render('auth/SignUp')
   },
-
-  renderLogin(req, res) {
-    res.render('../../views/auth/SingIn.jsx');
+  signIn(req, res, next){
+    res.render('auth/SignIn')
   },
-
-  renderDashboard(req, res) {
-    res.render('dashboard');
+  apiAuth(req, res, next){
+    res.json({user: req.user, token: res.locals.data.token})
+  },
+  redirectToLogin(req, res, next){
+    res.redirect('/users/login')
+  },
+    redirectToHome(req, res, next){
+    res.redirect('/')
   }
-};
+
+}
+
+module.exports = viewController

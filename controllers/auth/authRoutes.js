@@ -1,14 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const authApi = require('../controllers/auth/authApi');
-const authView = require('../views/auth/authView');
+const express = require('express')
+const router = express.Router()
+const authData = require('./authData')
+const authView = require('./authView')
 
+router.post('/', authData.createUser, authView.redirectToLogin)
+router.get('/', authView.signUp) 
+router.post('/login', authData.loginUser, authView.redirectToHome)
+router.get('/login', authView.signIn)
+router.put('/:id', authData.updateUser)
+router.delete('/:id', authData.auth, authData.deleteUser)
 
-router.get('/login', authView.loginForm);
-router.get('/register', authView.registerForm);
-
-router.post('/login', authApi.login);
-router.post('/register', authApi.register);
-router.get('/logout', authApi.logout);
-
-module.exports = router;
+module.exports = router

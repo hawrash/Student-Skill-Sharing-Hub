@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const userApi = require('../controllers/user/userApi');
-const userData = require('../controllers/user/userData');
-const userView = require('../controllers/user/userView');
-const { protect } = require('../middleware/authMiddleware');
+const userApi = require('../../controllers/user/userApi');
+const userData = require('../../controllers/user/userData');
+const userView = require('../../controllers/user/userView');
+const { protect } = require('../../middleware/authMiddleware');
 
 // API Routes
 router.post('/api/users', userApi.register);

@@ -1,49 +1,88 @@
-const authData = require('./authData'); 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const User = require('../../models/User')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
-module.exports = {
-  async registerUser(req, res) {
-    const { name, email, password, role } = req.body;
-    const existingUser = await authData.findUserByEmail(email);
-    if (existingUser) return res.status(400).send('Email already in use');
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await authData.createUser({ name, email, password: hashedPassword, role });
-
-    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET);
-    res.cookie('token', token).redirect('/dashboard');
-  },
-
-  async loginUser(req, res) {
-    const { email, password } = req.body;
-    const user = await authData.findUserByEmail(email);
-    if (!user) return res.status(401).send('Invalid credentials');
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).send('Invalid credentials');
-
-    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET);
-    res.cookie('token', token).redirect('/dashboard');
-  },
-
-  async getUserProfile(req, res) {
-
-    res.send('User profile endpoint');
-  },
-
-  async updateUser(req, res) {
-    res.send('Update user endpoint');
-  },
-
-  async deleteUser(req, res) {
-    
-    res.send('Delete user endpoint');
-  },
-
-  logout(req, res) {
-    res.clearCookie('token').redirect('/login');
+exports.auth = async (req, res, next) => {
+  try {
+    const token = req.header('uuthor').replace('Bearer ', '')
+    const data = jwt.verify(token, 'secret')
+    const user = await User.findOne({ _id: data._id })
+    if (!user) {
+      throw new Error()
+    }
+    req.user = user
+    next()
+  } catch (error) {
+    res.status(401).send('Not authorized')
   }
-};
+}
+
+
+exports.createUser = async (req, res) => {
+  try {
+   
+    const requiredFields = ['name', 'email', 'password'];
+    const hasAllFields = requiredFields.every(field => req.body[field]);
+    if (!hasAllFields) {
+      return res.status(400).json({ message: 'Name, email, and password are required' })
+    }
+    
+    const user = new User(req.body)
+    await user.save()
+    const token = await user.generateAuthToken()
+    res.status(201).json({ user, token })
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+
+exports.loginUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (!user || !await bcrypt.compare(req.body.password, user.password)) {
+      return res.status(400).json({ message: 'Invalid login credentials' })
+    }
+    const token = await user.generateAuthToken()
+    res.json({ user, token })
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+
+exports.updateUser = async (req, res) => {
+  try {
+    const updates = Object.keys(req.body)
+    const user = await User.findOne({ _id: req.params.id })
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+    updates.forEach(update => user[update] = req.body[update])
+    await user.save()
+    res.json(user)
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await req.user.deleteOne()
+    res.json({ message: 'User deleted successfully' })
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+
+exports.getProfile = async (req, res) => {
+  try {
+    await req.user.populate('student')
+    res.json({ user: req.user })
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+} 

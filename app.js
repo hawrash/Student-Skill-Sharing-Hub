@@ -3,29 +3,35 @@ const path = require('path');
 const jsxEngine = require('jsx-view-engine')
 const app = express();
 
-// Set up view engine to render React JSX views
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jsx');
 app.engine('jsx', jsxEngine())
 
-// Body parsing middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Import your routes
-const studentRoutes = require('./controllers/student/studentRoutes')
 
-// Use your routes
-app.use('/students', studentRoutes);
-app.use('/teacher', teacherRoutes);
-app.use('/controllers/auth/authRoutes.js', authRoutes);
+const studentRoutes = require('./controllers/student/studentRoutes')
+const authRoutes = require('./controllers/auth/authRoutes')
+//const teacherRoutes = require('./controllers/teacher/teacherRoutes') 
+const userRoutes = require('./controllers/user/userRoutes') 
+
+app.use('/auth', authRoutes);
+app.use('/student', studentRoutes);
+//app.use('/teacher', teacherRoutes);
 app.use('/user', userRoutes);
-// 404 handler
+
 app.use((req, res) => {
   res.status(404).send('404 Not Found');
 });
 
-// Error handler
+app.get('/', (req, res) => {
+  res.render('Layouts/layout', res.locals.data)
+})
+
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something went wrong');

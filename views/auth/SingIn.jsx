@@ -4,7 +4,7 @@ const Layout = require('../Layouts/layout')
 function SignIn (props) {
     return(
         <Layout>
-            <h1>🔐 Sign In</h1>
+            <h1> Sign In</h1>
             
             <h2 className="text-center mb-3">Welcome Back!</h2>
             
@@ -33,10 +33,10 @@ function SignIn (props) {
                 
                 <div className="d-flex gap-2">
                     <button type="submit" className="btn btn-primary">
-                        🔐 Sign In
+                         Sign In
                     </button>
                     <a href="/users/signup" className="btn btn-secondary">
-                        📝 Create Account
+                         Create Account
                     </a>
                 </div>
             </form>
