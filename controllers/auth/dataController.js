@@ -1,16 +1,18 @@
 const User = require('../../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { createUser } = require('./apiController')
 
-
+// instead of creating an object we can use the exports object directly
+// this is how
 
 exports.auth = async (req, res, next) => {
   try {
     let token
     if(req.query.token){
       token = req.query.token
-    }else if(req.header('auth')){
-      token = req.header('auth').replace('Bearer ', '')
+    }else if(req.header('Authorization')){
+      token = req.header('Authorization').replace('Bearer ', '')
     }else {
       throw new Error('No token provided')
     }
@@ -38,9 +40,10 @@ exports.createUser = async (req, res, next) => {
   } catch(error){
     res.status(400).json({message: error.message})
   }
-}
+}// good but needs to change
 
 exports.loginUser = async (req, res, next) => {
+  console.log("req.body", req.body)
   try{
     const user = await User.findOne({ email: req.body.email })
     if (!user || !await bcrypt.compare(req.body.password, user.password)) {
@@ -49,7 +52,8 @@ exports.loginUser = async (req, res, next) => {
       const token = await user.generateAuthToken()
       res.locals.data.token = token 
       req.user = user
-      next()
+      res.json(user)
+      // next()
     }
   } catch(error){
     res.status(400).json({message: error.message})

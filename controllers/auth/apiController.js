@@ -2,10 +2,10 @@ const User = require('../../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-
+// API Authentication middleware - uses headers instead of query params
 exports.auth = async (req, res, next) => {
   try {
-    const token = req.header('uuthor').replace('Bearer ', '')
+    const token = req.header('Authorization').replace('Bearer ', '')
     const data = jwt.verify(token, 'secret')
     const user = await User.findOne({ _id: data._id })
     if (!user) {
@@ -18,14 +18,14 @@ exports.auth = async (req, res, next) => {
   }
 }
 
-
+// API User creation
 exports.createUser = async (req, res) => {
   try {
-   
+    // Validate required fields
     const requiredFields = ['name', 'email', 'password'];
-    const hasAllFields = requiredFields.every(field => req.body[field]);
-    if (!hasAllFields) {
-      return res.status(400).json({ message: 'Name, email, and password are required' })
+    const missingFields = requiredFields.filter(field => !req.body[field]);
+    if (missingFields.length > 0) {
+      return res.status(400).json({ message: `Missing required fields: ${missingFields.join(', ')}` });
     }
     
     const user = new User(req.body)
@@ -37,7 +37,7 @@ exports.createUser = async (req, res) => {
   }
 }
 
-
+// API User login
 exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email })
@@ -51,7 +51,7 @@ exports.loginUser = async (req, res) => {
   }
 }
 
-
+// API User update
 exports.updateUser = async (req, res) => {
   try {
     const updates = Object.keys(req.body)
@@ -67,7 +67,7 @@ exports.updateUser = async (req, res) => {
   }
 }
 
-
+// API User deletion
 exports.deleteUser = async (req, res) => {
   try {
     await req.user.deleteOne()
@@ -77,12 +77,12 @@ exports.deleteUser = async (req, res) => {
   }
 }
 
-
-exports.getProfile = async (req, res) => {
-  try {
-    await req.user.populate('student')
-    res.json({ user: req.user })
-  } catch (error) {
-    res.status(400).json({ message: error.message })
-  }
-} 
+// // API Get user profile
+// exports.getProfile = async (req, res) => {
+//   try {
+//     await req.user.populate('fruits')
+//     res.json({ user: req.user })
+//   } catch (error) {
+//     res.status(400).json({ message: error.message })
+//   }
+// } 

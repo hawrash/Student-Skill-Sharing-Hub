@@ -2,7 +2,7 @@
   "name": "student-skill-sharing-hub",
   "version": "1.0.0",
   "description": "**SkillShare Hub** is a peer-to-peer learning platform where students can teach and learn from one another. Users can offer lessons in topics like coding, art, music, and more. The app supports secure login, lesson creation, and booking, helping foster collaboration and knowledge-sharing in a simple, accessible way.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +19,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^8.17.0",
     "morgan": "^1.10.1",
-    "react": "^19.1.1"
+    "nodemon": "^3.1.10"
   },
   "devDependencies": {
     "artillery": "^1.7.9",

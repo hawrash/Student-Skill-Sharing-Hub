@@ -10,9 +10,6 @@ const viewController = {
   },
   redirectToLogin(req, res, next){
     res.redirect('/users/login')
-  },
-    redirectToHome(req, res, next){
-    res.redirect('/')
   }
 
 }
