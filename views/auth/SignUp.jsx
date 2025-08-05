@@ -41,6 +41,13 @@ function SignUp (props) {
                         required 
                     />
                 </div>
+                <div className="form-group">
+                    <label htmlFor="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
                 
                 <div className="d-flex gap-2">
                     <button type="submit" className="btn btn-primary">
