@@ -23,8 +23,13 @@ router.get('/',  authController.auth, dataController.getAvailableLessons, viewCo
 //Create lesson
 router.get('/new', authController.auth, viewController.showNewForm);
 
+//Show lesson
+router.get('/new', authController.auth, viewController.showNewForm);
+
 // Show lesson
 router.get('/:id', authController.auth, dataController.getLessonById, viewController.showLesson);
 
 
 module.exports = router;
+
+

@@ -7,15 +7,16 @@ const path = require('path');
 // Routes
 const userRoutes = require('./controllers/auth/routeController');
 const lessonRoutes = require('./controllers/lesson/routeController'); 
+const commintRoutes = require('./controllers/comment/routeController'); 
 
 const app = express();
 
-// View engine
+//  View engine setup
 app.set('view engine', 'jsx');
 app.engine('jsx', jsxEngine());
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware
+//  Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -23,11 +24,16 @@ app.use((req, res, next) => {
   res.locals.data = {};
   next();
 });
+
+//  Static files middleware — ✅ RIGHT HERE!
 app.use(express.static('public'));
+
+//  Logger
 app.use(morgan('dev'));
 
-// Routes
+//  Routes
 app.use('/users', userRoutes);
 app.use('/lesson', lessonRoutes); 
+app.use('/comment', commintRoutes);
 
 module.exports = app;

@@ -5,14 +5,17 @@ function GalleryLayout(props) {
     <html>
       <head>
         <title>SkillHub</title>
-        <link rel="stylesheet" href="/styles.css" />
+        <link rel="stylesheet" href="/css/style.css" />
       </head>
       <body>
         <header>
-          <img src={`/public/images/logo.jpg`} alt="App Logo" className="logo" />
-          <h1>Welcome to SkillHub</h1>
+          <div className="site-title">SkillHub</div>
+          <img src="/images/logo.jpg" alt="App Logo" className="logo" />
         </header>
-        {props.children}
+
+        <main className="container">
+          {props.children}
+        </main>
       </body>
     </html>
   );

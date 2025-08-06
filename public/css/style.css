@@ -1,25 +1,53 @@
-body {
-  font-family: Arial, sans-serif;
+
+* {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #9bc4ccff;
   color: #333;
+  line-height: 1.6;
 }
 
-header,
-nav {
-  background-color: #8191a0ff;
+
+header {
+  background-color: #c1adcfff;
   color: white;
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
 }
 
-main {
-  padding: 2rem;
+.site-title {
+  font-size: 2rem;
+  font-weight: bold;
 }
+
+.logo {
+  height: 150%;
+  width: auto;
+  max-height: 150%;
+  object-fit: contain;
+} 
+
+
+main.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #d6bcd4ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(55, 147, 212, 0.93);
+}
+
 
 a {
-  color: #90a8cdff;
+  color: #0066ffff;
   text-decoration: none;
 }
 
@@ -27,10 +55,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-}
 
 .card {
   background-color: #aaa4cdff;
@@ -41,6 +65,7 @@ a:hover {
   box-shadow: 0 2px 5px rgba(198, 167, 214, 0.97);
 }
 
+
 button {
   background-color: #6493b3ff;
   color: white;
@@ -48,8 +73,47 @@ button {
   padding: 0.6rem 1.2rem;
   border-radius: 5px;
   cursor: pointer;
+
+  display: block;
+  margin: 1rem auto;
+  font-size: 1rem;
 }
 
 button:hover {
-  background-color: #6493b3ff;
+  background-color: #547c99ff;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  color: #777;
+  font-size: 0.9rem;
 }

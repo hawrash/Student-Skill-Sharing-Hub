@@ -196,16 +196,11 @@ Student-Skill-Sharing-Hub/
 │   ├── auth
 │   └── Lesson
 ├── └──commint
-│   └── teacher
-├── └──student
 ├── views/
 │   ├── auth
-├── └──student
 │   └── layout.jsx
 ├── routes/
-│   ├── studentRoutes.js
 │   └── userRoutes.js
-├── └──webRoutes.js
 ├── public/
 │   └── css/
 ├── tests/
