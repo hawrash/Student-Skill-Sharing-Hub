@@ -1,28 +1,22 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true }); 
+const dataController = require('./dataController');
+const viewController = require('./viewController');
+const authController = require('../../controllers/auth/dataController');
 
-const data = require('./dataController');
-const view = require('./viewController');
+// New comment form
+router.get('/new/:lessonId', authController.auth, viewController.showNewForm);
 
-// Index
-router.get('/', data.getAllComments, view.showAllComments);
+// Create comment
+router.post('/new/:lessonId', authController.auth, dataController.createComment, viewController.redirectToIndex);
 
-// New
-router.get('/new', view.showNewForm);
+// Edit comment form
+router.get('/:id/edit', dataController.getComment, viewController.showEditForm);
 
-// Create
-router.post('/', data.createComment, view.redirectToIndex);
+// Update comment
+router.put('/:id', dataController.updateComment, viewController.redirectToIndex);
 
-// Show
-router.get('/:id', data.getComment, view.showComment);
-
-// Edit
-router.get('/:id/edit', data.getComment, view.showEditForm);
-
-// Update
-router.put('/:id', data.updateComment, view.redirectToIndex);
-
-// Delete
-router.delete('/:id', data.deleteComment, view.redirectToIndex);
+// Delete comment
+router.delete('/:id', dataController.deleteComment, viewController.redirectToIndex);
 
 module.exports = router;

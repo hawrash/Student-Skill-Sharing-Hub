@@ -29,6 +29,11 @@ router.get('/new', authController.auth, viewController.showNewForm);
 // Show lesson
 router.get('/:id', authController.auth, dataController.getLessonById, viewController.showLesson);
 
+// post route for creating a new lesson
+router.post('/', authController.auth, dataController.create, (req, res) => {
+  res.redirect(`/lesson/${res.locals.data.lesson._id}?token=${res.locals.data.token}`);
+})
+
 
 module.exports = router;
 

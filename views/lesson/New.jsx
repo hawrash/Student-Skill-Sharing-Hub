@@ -6,7 +6,7 @@ function New(props) {
     <Layout>
       <main className="container">
         <h2>Create New Lesson</h2>
-        <form method="POST" action="/lesson">
+        <form method="POST" action={`/lesson?token=${props.token || ''}`}>
           {/* Hidden token input */}
           <input type="hidden" name="token" value={props.token || ''} />
 

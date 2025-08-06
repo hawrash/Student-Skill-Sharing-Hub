@@ -27,7 +27,7 @@ const getAvailableLessons = async (req, res, next) => {
 // Fetch lesson by ID for editing or showing
 const getLessonById = async (req, res, next) => {
   try {
-    const lesson = await Lesson.findById(req.params.id).populate('teacher', 'name').populate('student', 'name');
+    const lesson = await Lesson.findById(req.params.id).populate('teacher', 'name').populate('student', 'name').populate('comments');
     if (!lesson) return res.status(404).send('Lesson not found');
     res.locals.lesson = lesson;
     res.locals.user = req.user; 
@@ -53,9 +53,25 @@ const updateLesson = async (req, res, next) => {
   }
 };
 
+// Create a new lesson
+const create = async (req, res, next) => {
+  try {
+    const lesson = new Lesson({
+      ...req.body,
+      teacher: req.user._id
+    });
+    await lesson.save();
+    res.locals.data.lesson = lesson;
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}      
+
 module.exports = {
   getLessonsByTeacher,
   getAvailableLessons,
   getLessonById,
   updateLesson,
+  create
 };

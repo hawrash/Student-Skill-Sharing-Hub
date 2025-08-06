@@ -12,7 +12,8 @@ module.exports = {
   },
 
   showNewForm(req, res) {
-    res.render('comment/New');
+    res.locals.data.lessonId = req.params.lessonId; // Pass lessonId to the vie
+    res.render('comment/New', res.locals.data);
   },
 
   redirectToIndex(req, res) {

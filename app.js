@@ -7,7 +7,7 @@ const path = require('path');
 // Routes
 const userRoutes = require('./controllers/auth/routeController');
 const lessonRoutes = require('./controllers/lesson/routeController'); 
-const commintRoutes = require('./controllers/comment/routeController'); 
+const commentRoutes = require('./controllers/comment/routeController'); 
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//  Static files middleware — ✅ RIGHT HERE!
+//  Static files middleware 
 app.use(express.static('public'));
 
 //  Logger
@@ -34,6 +34,6 @@ app.use(morgan('dev'));
 //  Routes
 app.use('/users', userRoutes);
 app.use('/lesson', lessonRoutes); 
-app.use('/comment', commintRoutes);
+app.use('/comment', commentRoutes);
 
 module.exports = app;

@@ -40,9 +40,9 @@ main.container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #d6bcd4ff;
+  background-color: #d2c7d1ff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(55, 147, 212, 0.93);
+  box-shadow: 0 2px 8px #409ddfff;
 }
 
 
@@ -57,7 +57,7 @@ a:hover {
 
 
 .card {
-  background-color: #aaa4cdff;
+  background-color: #bedae0ff;
   border: 1px solid #ddd;
   padding: 1.5rem;
   margin-bottom: 1rem;
@@ -68,7 +68,7 @@ a:hover {
 
 button {
   background-color: #6493b3ff;
-  color: white;
+  color: #000eabff;;
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 5px;

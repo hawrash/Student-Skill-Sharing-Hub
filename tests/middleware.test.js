@@ -1,30 +1,44 @@
+const request = require('supertest');
+const express = require('express');
 const jwt = require('jsonwebtoken');
-const { protect } = require('../middleware/authMiddleware');
+const { auth } = require('../middleware/authMiddleware'); // Adjust path as needed
+require('dotenv').config({ path: '.env.test' }); // Make sure JWT_SECRET is in this file
 
+const app = express();
+app.use(express.json());
 
-const mockReq = (token) => ({ headers: { authorization: `Bearer ${token}` } });
-const mockRes = {};
-const mockNext = jest.fn();
+// Create a dummy protected route
+app.get('/protected', auth, (req, res) => {
+  res.status(200).json({ message: 'Access granted', user: req.user });
+});
 
-describe('Middleware: protect', () => {
-  it('should call next with valid token', () => {
-    const token = jwt.sign({ id: 'user123' }, process.env.JWT_SECRET);
-    const req = mockReq(token);
+describe('Auth Middleware', () => {
+  const validPayload = { id: 'abc123', role: 'teacher', name: 'Test User' };
+  const validToken = jwt.sign(validPayload, process.env.JWT_SECRET);
 
-    protect(req, mockRes, mockNext);
-    expect(mockNext).toHaveBeenCalled();
+  it('should allow access with valid token', async () => {
+    const res = await request(app)
+      .get('/protected')
+      .set('Authorization', `Bearer ${validToken}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.message).toBe('Access granted');
+    expect(res.body.user.id).toBe(validPayload.id);
   });
 
-  it('should return error without token', () => {
-    const req = { headers: {} };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    const next = jest.fn();
+  it('should deny access with missing token', async () => {
+    const res = await request(app).get('/protected');
 
-    protect(req, res, next);
-    expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalled();
+    expect(res.statusCode).toBe(401);
+    expect(res.text).toBe('Access denied. No token provided.');
+  });
+
+  it('should deny access with invalid token', async () => {
+    const res = await request(app)
+      .get('/protected')
+      .set('Authorization', 'Bearer badtoken');
+
+    expect(res.statusCode).toBe(401);
+    expect(res.text).toBe('Invalid token.');
   });
 });
