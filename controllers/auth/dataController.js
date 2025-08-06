@@ -52,8 +52,7 @@ exports.loginUser = async (req, res, next) => {
       const token = await user.generateAuthToken()
       res.locals.data.token = token 
       req.user = user
-      res.json(user)
-      // next()
+      next()
     }
   } catch(error){
     res.status(400).json({message: error.message})
