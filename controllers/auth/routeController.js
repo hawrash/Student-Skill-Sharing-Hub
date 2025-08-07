@@ -4,10 +4,10 @@ const dataController = require('./dataController')
 const viewController = require('./viewController')
 const lessonViewController =  require('../../controllers/lesson/viewController')
 
-router.post('/', dataController.createUser, viewController.redirectToLogin)// signup user => login page
-router.get('/', viewController.signUp) // show sign up form
+router.post('/', dataController.createUser, viewController.redirectToLogin)
+router.get('/', viewController.signUp) 
 router.post('/login', dataController.loginUser, lessonViewController.redirectToLessons)
-router.get('/login', viewController.signIn) // show login form
+router.get('/login', viewController.signIn) 
 router.put('/:id', dataController.updateUser)
 router.delete('/:id', dataController.auth, dataController.deleteUser)
 

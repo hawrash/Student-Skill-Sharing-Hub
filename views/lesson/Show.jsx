@@ -2,17 +2,15 @@ const React = require('react');
 const Layout = require('../Layouts/layout');
 
 function Show({ lesson, user, token }) {
-  // Format the date safely
-  const formattedDate =
-    lesson.date instanceof Date
-      ? lesson.date.toISOString().substring(0, 10)
-      : 'N/A';
+  const tokenQuery = token ? `?token=${token}` : '';
 
-  // Link back to lessons page (include token if required)
-  const backLink = `/lesson?token=${token}`;
+  const formattedDate = lesson.date
+    ? new Date(lesson.date).toISOString().substring(0, 10)
+    : 'N/A';
 
-  // Link to edit page (only for teacher who owns it)
-  const editLink = `/${lesson._id}/edit?token=${token}`;
+  const backLink = `/lesson${tokenQuery}`;
+  const editLink = `/lesson/${lesson._id}/edit${tokenQuery}`;
+  const deleteAction = `/lesson/${lesson._id}${tokenQuery}&_method=DELETE`;
 
   return (
     <Layout user={user}>
@@ -28,8 +26,9 @@ function Show({ lesson, user, token }) {
           {lesson.student && (
             <p><strong>Student:</strong> {lesson.student.name}</p>
           )}
-        <a href={`/comment/new/${lesson._id}?token=${token}`}>Add Comment</a>
-          {/* Render comments if any */}
+
+          <a href={`/comment/new/${lesson._id}${tokenQuery}`}>Add Comment</a>
+
           {lesson.comments && lesson.comments.length > 0 ? (
             <div>
               <h3>Comments:</h3>
@@ -41,16 +40,21 @@ function Show({ lesson, user, token }) {
             <p>No comments yet.</p>
           )}
 
-          {/* Edit link for the teacher who owns this lesson */}
-          {user.role === 'teacher' && user._id === lesson.teacher._id && (
-            <a href={editLink} className="button">Edit Lesson</a>
-          )}
-
-          {/* Back to Lessons */}
-          <a href={backLink} style={{ display: 'block', marginTop: '1rem' }}>
-            &larr; Back to Lessons
-          </a>
-        </div>
+            <a href={`/lesson/${lesson._id}/edit?token=${token}`} className="btn btn-primary">
+                        ✏️ Edit {lesson.name}
+                    </a>
+                </div>
+                
+                <div className="lesson">
+                    <form action={`/lesson/${lesson._id}?_method=DELETE&token=${token}`} method="POST">
+                        <button type="submit" className="btn btn-danger">
+                            🗑️ Delete {lesson.name}
+                        </button>
+                    </form>
+                </div>
+        <a href={backLink} className="back-to-lesson-link">
+          &larr; Back to Lessons
+        </a>
       </main>
     </Layout>
   );

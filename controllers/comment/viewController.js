@@ -12,7 +12,7 @@ module.exports = {
   },
 
   showNewForm(req, res) {
-    res.locals.data.lessonId = req.params.lessonId; // Pass lessonId to the vie
+    res.locals.data.lessonId = req.params.lessonId; 
     res.render('comment/New', res.locals.data);
   },
 

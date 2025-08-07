@@ -6,7 +6,7 @@ const path = require('path');
 
 // Routes
 const userRoutes = require('./controllers/auth/routeController');
-const lessonRoutes = require('./controllers/lesson/routeController'); 
+const lessonRoutes = require('./controllers/lesson/routeController');
 const commentRoutes = require('./controllers/comment/routeController'); 
 
 const app = express();

@@ -5,7 +5,7 @@ const getLessonsByTeacher = async (req, res, next) => {
   try {
     const lessons = await Lesson.find({ teacher: req.user._id });
     res.locals.lessons = lessons;
-    res.locals.user = req.user; // Ensure user is available in the response   
+    res.locals.user = req.user;
     next();
   } catch (error) {
     next(error);
@@ -17,34 +17,56 @@ const getAvailableLessons = async (req, res, next) => {
   try {
     const lessons = await Lesson.find({ status: 'pending' }).populate('teacher', 'name');
     res.locals.lessons = lessons;
-    res.locals.user = req.user; 
+    res.locals.user = req.user;
     next();
   } catch (error) {
     next(error);
   }
 };
 
-// Fetch lesson by ID for editing or showing
+// Fetch a single lesson by ID
 const getLessonById = async (req, res, next) => {
   try {
-    const lesson = await Lesson.findById(req.params.id).populate('teacher', 'name').populate('student', 'name').populate('comments');
+    const lesson = await Lesson.findById(req.params.id)
+      .populate('teacher', 'name')
+      .populate('student', 'name')
+      .populate('comments');
     if (!lesson) return res.status(404).send('Lesson not found');
     res.locals.lesson = lesson;
-    res.locals.user = req.user; 
+    res.locals.user = req.user;
     next();
   } catch (error) {
     next(error);
   }
 };
 
-// Update lesson data (teacher only)
+// Create a new lesson (teacher only)
+const create = async (req, res, next) => {
+  try {
+    const lesson = new Lesson({
+      ...req.body,
+      teacher: req.user._id,
+    });
+    await lesson.save();
+    res.locals.data = { lesson };
+    next();
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Update lesson details (teacher only)
 const updateLesson = async (req, res, next) => {
+  console.log('Updating lesson with data:', req.body);
+  console.log('Lesson ID:', req.params.id);
+  console.log('User ID:', req.user._id);
   try {
     const updatedLesson = await Lesson.findOneAndUpdate(
-      { _id: req.params.id, teacher: req.user._id },
+      { _id: req.params.id },
       req.body,
       { new: true }
     );
+    console.log('Updated lesson:', updatedLesson);
     if (!updatedLesson) return res.status(403).send('Not authorized to update');
     res.locals.lesson = updatedLesson;
     next();
@@ -53,25 +75,24 @@ const updateLesson = async (req, res, next) => {
   }
 };
 
-// Create a new lesson
-const create = async (req, res, next) => {
+// Delete a lesson (teacher only)
+const deleteLesson = async (req, res, next) => {
   try {
-    const lesson = new Lesson({
-      ...req.body,
-      teacher: req.user._id
+    const deleted = await Lesson.findOneAndDelete({
+      _id: req.params.id,
     });
-    await lesson.save();
-    res.locals.data.lesson = lesson;
+    if (!deleted) return res.status(403).send('Not authorized to delete');
     next();
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
   }
-}      
+};
 
 module.exports = {
   getLessonsByTeacher,
   getAvailableLessons,
   getLessonById,
+  create,
   updateLesson,
-  create
+  deleteLesson,
 };

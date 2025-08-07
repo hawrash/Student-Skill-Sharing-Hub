@@ -1,9 +1,10 @@
 const React = require('react');
-function Edit({ lesson }) {
+
+function Edit({ lesson, token }) {
   return (
     <div>
       <h2>Edit</h2>
-      <form method="POST" action={`/${lesson._id}?_method=PUT`}>
+      <form method="POST" action={`/lesson/${lesson._id}?_method=PUT&token=${token}`}>
         <label>Topic:</label><br />
         <input
           type="text"
@@ -27,7 +28,9 @@ function Edit({ lesson }) {
         <input
           type="date"
           name="date"
-          defaultValue={lesson.date ? lesson.date.substring(0, 10) : ''}
+          defaultValue={
+            lesson.date ? new Date(lesson.date).toISOString().substring(0, 10) : ''
+          }
           required
           title="Date"
         /><br /><br />

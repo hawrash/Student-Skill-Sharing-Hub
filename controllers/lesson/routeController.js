@@ -1,40 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const { protectView } = require('../../middleware/authMiddleware');
+
+const authController = require('../../controllers/auth/dataController');
 const dataController = require('../../controllers/lesson/dataController');
 const viewController = require('../../controllers/lesson/viewController');
-const authController = require('../../controllers/auth/dataController');
 
-// Teacher routes
-router.get('/teacher', authController.auth, viewController.showTeacherLessons ,viewController.showTeacherLessons);
-router.get('/:id/edit',  authController.auth, dataController.getLessonById, dataController.updateLesson);
-router.put('/:id',  authController.auth, dataController.updateLesson, (req, res) => {
-  res.redirect('/lesson/teacher');
+
+router.get('/teacher', authController.auth, dataController.getLessonsByTeacher, viewController.showTeacherLessons);
+
+router.get('/new', authController.auth, viewController.showNewForm);
+
+router.post('/', authController.auth, dataController.create, (req, res) => {
+  const lessonId = res.locals.data.lesson._id;
+  const token = res.locals.data.token || req.query.token;
+  res.redirect(`/lesson/${lessonId}?token=${token}`);
 });
 
+router.get('/:id/edit', authController.auth, dataController.getLessonById, viewController.showEditForm);
 
-// student routes
+
+router.put('/:id', authController.auth, dataController.getLessonById, dataController.updateLesson, (req, res) => {
+  const token = req.query.token || res.locals.data.token;
+  res.redirect(`/lesson/${req.params.id}?token=${token}`);
+});
+
 router.get('/student', authController.auth, dataController.getAvailableLessons, viewController.showAvailableLessons);
 
-//Index
 
-router.get('/',  authController.auth, dataController.getAvailableLessons, viewController.showAvailableLessons);
+router.get('/', authController.auth, dataController.getAvailableLessons, viewController.showAvailableLessons);
 
-//Create lesson
-router.get('/new', authController.auth, viewController.showNewForm);
-
-//Show lesson
-router.get('/new', authController.auth, viewController.showNewForm);
-
-// Show lesson
 router.get('/:id', authController.auth, dataController.getLessonById, viewController.showLesson);
 
-// post route for creating a new lesson
-router.post('/', authController.auth, dataController.create, (req, res) => {
-  res.redirect(`/lesson/${res.locals.data.lesson._id}?token=${res.locals.data.token}`);
-})
 
+router.delete('/:id', authController.auth, dataController.getLessonById, dataController.deleteLesson, (req, res) => {
+  const token = req.query.token || res.locals.data.token;
+  res.redirect(`/lesson/teacher?token=${token}`);
+});
 
 module.exports = router;
-
-

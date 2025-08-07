@@ -9,12 +9,16 @@ function Index(props) {
       <div>
         <h2>All Lessons</h2>
 
+        {/* Link to teacher dashboard */}
         {user.role === 'teacher' && (
-          <a href={`/lesson/new?token=${token}`}>+ New</a>
+          <>
+            <a href={`/lesson/teacher?token=${token}`}>My Lessons</a><br />
+            <a href={`/lesson/new?token=${token}`}>+ New</a>
+          </>
         )}
 
         <ul>
-          {lessons.map((lesson) => (
+          {lessons?.map((lesson) => (
             <li key={lesson._id}>
               <strong>{lesson.topic}</strong> –{' '}
               {lesson.date instanceof Date

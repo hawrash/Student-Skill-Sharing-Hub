@@ -1,4 +1,4 @@
-
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,6 @@ body {
   color: #333;
   line-height: 1.6;
 }
-
 
 header {
   background-color: #c1adcfff;
@@ -33,8 +32,7 @@ header {
   width: auto;
   max-height: 150%;
   object-fit: contain;
-} 
-
+}
 
 main.container {
   max-width: 900px;
@@ -45,7 +43,7 @@ main.container {
   box-shadow: 0 2px 8px #409ddfff;
 }
 
-
+/* Links */
 a {
   color: #0066ffff;
   text-decoration: none;
@@ -55,7 +53,7 @@ a:hover {
   text-decoration: underline;
 }
 
-
+/* Cards */
 .card {
   background-color: #bedae0ff;
   border: 1px solid #ddd;
@@ -65,26 +63,60 @@ a:hover {
   box-shadow: 0 2px 5px rgba(198, 167, 214, 0.97);
 }
 
-
-button {
+/* Common button style (for both <a> and <button>) */
+.button {
   background-color: #6493b3ff;
-  color: #000eabff;;
+  color: #000eabff;
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none; /* remove underline for <a> */
+  display: inline-block;
+  font-size: 1rem;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+.button:hover {
+  background-color: #547c99ff;
+  color: white;
+}
+
+/* For actual <button> elements */
+button {
+  background-color: #6493b3ff;
+  color: #000eabff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
   display: block;
   margin: 1rem auto;
   font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
   background-color: #547c99ff;
+  color: white;
 }
 
+/* ========================= */
+/* FORMS */
+/* ========================= */
 
-form {
+/* Inline form (e.g., Delete next to Edit) */
+form.inline {
+  display: inline;
+}
+
+form.inline button {
+  margin-left: 1rem;
+}
+
+/* Stacked form (e.g., in Create/Edit views) */
+form.stacked {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -92,7 +124,9 @@ form {
 
 input[type="text"],
 input[type="email"],
-textarea {
+input[type="date"],
+textarea,
+select {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -109,11 +143,25 @@ textarea {
   min-height: 100px;
 }
 
-
+/* ========================= */
+/* FOOTER */
+/* ========================= */
 footer {
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
   color: #777;
   font-size: 0.9rem;
+}
+
+/* ========================= */
+/* Button Group (Optional) */
+/* ========================= */
+.lesson-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.lesson-actions .button {
+  margin: 0.5rem;
 }
